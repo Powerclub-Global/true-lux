@@ -1,26 +1,173 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================================
+   True Lux -- Global Styles & Design Tokens
+   ============================================================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold: #C09863;
+  --color-gold-light: #D4B48A;
+  --color-gold-dark: #A07D4F;
+  --color-navy: #0A1628;
+  --color-navy-light: #12233D;
+  --color-charcoal: #1A1A2E;
+  --color-background: #030712;
+  --color-foreground: #F8FAFC;
+  --color-muted: #94A3B8;
+  --color-border: rgba(192, 152, 99, 0.15);
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   Selection
+   -------------------------------------------------------------------------- */
+
+::selection {
+  background-color: rgba(192, 152, 99, 0.3);
+  color: #F8FAFC;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Scrollbar
+   -------------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C09863;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4B48A;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C09863 #0A0A0A;
+}
+
+/* --------------------------------------------------------------------------
+   Focus Styles
+   -------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid #C09863;
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Utility Classes
+   -------------------------------------------------------------------------- */
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D4B48A 0%, #C09863 50%, #A07D4F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-gold-gradient {
+  border-image: linear-gradient(135deg, #D4B48A 0%, #C09863 50%, #A07D4F 100%) 1;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #D4B48A 0%, #C09863 50%, #A07D4F 100%);
+}
+
+/* --------------------------------------------------------------------------
+   Luxury Glow Effect
+   -------------------------------------------------------------------------- */
+
+.gold-glow {
+  box-shadow: 0 0 20px rgba(192, 152, 99, 0.15), 0 0 40px rgba(192, 152, 99, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   Smooth Transitions
+   -------------------------------------------------------------------------- */
+
+a,
+button {
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll Indicator Animation
+   -------------------------------------------------------------------------- */
+
+@keyframes scroll-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(12px);
+    opacity: 0.3;
+  }
+}
+
+.animate-scroll-bounce {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+   Radix Accordion Animations
+   -------------------------------------------------------------------------- */
+
+@keyframes accordion-down {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-up {
+  0% {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  100% {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+.animate-accordion-down {
+  animation: accordion-down 300ms ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 300ms ease-out;
 }
